@@ -1,11 +1,14 @@
+import os
+
 from feature.extractor import Extractor
 from imageio import imread
 import numpy as np
 import itertools
+from six.moves import cPickle
 
 
 class HC(Extractor):
-    def __init__(self, slices, n_bin, h_type='global', d_type='euler'):
+    def __init__(self, slices=3, n_bin=12, h_type='global', d_type='euler'):
         self.h_type = h_type
         self.d_type = d_type
         self.slices = slices
@@ -48,8 +51,25 @@ class HC(Extractor):
 
     def make_indices(self, samples):
         if self.h_type == 'global':
-            pass
+            sample_path = 'HC_{}_bin{}'.format(self.h_type, self.n_bin)
         elif self.h_type == 'region':
-            pass
+            sample_path = 'HC_{}_bin{}_slices{}'.format(self.h_type, self.n_bin, self.slices)
         else:
             raise Exception("不支持的特征类型")
+
+        try:
+            images = cPickle.load(open(os.path.join('indices', sample_path), 'rb', True))
+            print("using index: type=HC(%s), d_type=%s" % (self.h_type, self.d_type))
+        except:
+            print("computing index: type=HC(%s), d_type=%s" % (self.h_type, self.d_type))
+            images = []
+            data = samples.get_data()
+            for d in data.itertuples():
+                d_img, d_cls = getattr(d, "img"), getattr(d, "cls")
+                d_hist = self.hist(d_img)
+                samples.append({
+                    'img': d_img,
+                    'cls': d_cls,
+                    'hist': d_hist
+                })
+        cPickle.dump(images, open(os.path.join('indices', sample_path), "wb", True))

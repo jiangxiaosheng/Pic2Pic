@@ -1,6 +1,7 @@
 import unittest
 from utils.download import download
 import numpy as np
+from cv.feature.samples import *
 
 
 class CommonTest(unittest.TestCase):
@@ -12,3 +13,7 @@ class CommonTest(unittest.TestCase):
         b = np.array([2, 3, 4, 5])
         print(np.sum((a - b) ** 2))
         print(np.linspace(0, 4, 3))
+
+    def test_samples(self):
+        s = Samples('../samples')
+        print(s.get_data())
