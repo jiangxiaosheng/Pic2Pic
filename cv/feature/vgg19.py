@@ -31,7 +31,7 @@ class VGGNet(Extractor):
         return feature[0] / np.linalg.norm(feature[0])
 
     def make_indices(self, samples):
-        sample_path = 'vgg19_pooling_{}'.format(self.pooling)
+        sample_path = 'vgg19'
         try:
             images = cPickle.load(open(os.path.join('indices', sample_path), 'rb', True))
         except:
@@ -48,7 +48,8 @@ class VGGNet(Extractor):
                     'cls': d_cls,
                     'hist': feature
                 })
-        cPickle.dump(images, open(os.path.join('indices', sample_path), "wb", True))
+            cPickle.dump(images, open(os.path.join('indices', sample_path), "wb", True))
+        return images
 
 
 if __name__ == '__main__':

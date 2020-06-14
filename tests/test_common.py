@@ -1,7 +1,7 @@
 import unittest
 from utils.download import download
 import numpy as np
-from feature.utils.samples import *
+from feature.utils import *
 
 
 class CommonTest(unittest.TestCase):
@@ -17,3 +17,10 @@ class CommonTest(unittest.TestCase):
     def test_samples(self):
         s = Samples('../dataset')
         print(s.get_data())
+
+    def test_distance(self):
+        a = np.random.random(5)
+        b = np.random.random(5)
+        print(a)
+        print(b)
+        print(distance(a, b, method='chebyshev'))

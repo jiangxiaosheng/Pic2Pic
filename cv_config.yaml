@@ -1,2 +1,14 @@
+HC:
+  slices: 3
+  n_bin: 6
+
 edge:
-  stride: (1, 1)
+  stride: (2, 2)
+  slices: 6
+
+HOG:
+  slices: 6
+  n_bin: 10
+  orientation: 8
+  ppc: (2, 2)
+  ppb: (1, 1)
