@@ -1,7 +1,7 @@
 import unittest
 from utils.download import download
 import numpy as np
-from cv.feature.samples import *
+from feature.utils.samples import *
 
 
 class CommonTest(unittest.TestCase):
@@ -15,5 +15,5 @@ class CommonTest(unittest.TestCase):
         print(np.linspace(0, 4, 3))
 
     def test_samples(self):
-        s = Samples('../samples')
+        s = Samples('../dataset')
         print(s.get_data())

@@ -1,2 +1,3 @@
-from . import extractor, HC, samples
+from . import extractor, HC
+from .utils import samples
 

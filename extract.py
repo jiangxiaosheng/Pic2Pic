@@ -1,7 +1,7 @@
-from cv.feature.samples import Samples
+from feature.utils.samples import Samples
 from cv.feature.HC import HC
 
-samples_dir = 'samples'
+samples_dir = 'dataset'
 
 if __name__ == "__main__":
     hc = HC()
