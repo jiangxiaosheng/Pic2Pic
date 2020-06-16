@@ -47,12 +47,12 @@ class HOG(Extractor):
             images = cPickle.load(open(os.path.join('indices', sample_path), 'rb', True))
         except:
             images = []
-            data = samples.get_data()
+            data = samples.get_images_by_class()
             i = 1
-            for d in data.itertuples():
+            for d in data:
                 print(i)
                 i += 1
-                d_img, d_cls = getattr(d, "img"), getattr(d, "cls")
+                d_img, d_cls = d["img"], d["cls"]
                 feature = self.extract_feature(d_img)
                 images.append({
                     'img': d_img,

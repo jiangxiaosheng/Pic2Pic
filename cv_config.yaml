@@ -12,3 +12,7 @@ HOG:
   orientation: 8
   ppc: (2, 2)
   ppb: (1, 1)
+
+LSH:
+  ratio: 0.2
+  type: sparse
