@@ -10,9 +10,7 @@ def make_records(samples_dir):
     with open(records_filename, 'w') as file:
         file.write('img,cls')
         for root, _, files in os.walk(samples_dir, topdown=True):
-            print(root, files)
             cls = root.split('\\')[-1]
-            print(cls)
             for name in files:
                 suffix = name.split('.')[-1]
                 if suffix not in allowed_type:
@@ -33,8 +31,18 @@ class Samples:
     def get_classes(self):
         return self.classes
 
+    def get_images_by_class(self, classes):
+        images_map = {}
+        for cls in classes:
+            images_map[cls] = []
+        for i in range(len(self.data['cls'])):
+            cls = self.data['cls'][i]
+            if cls not in classes:
+                break
+            images_map[cls].append(self.data['img'][i])
+        return images_map
+
 
 if __name__ == '__main__':
     samples = Samples('dataset')
-    # print(samples.get_data())
-    # print(samples.get_classes())
+    print(samples.get_images_by_class(['accordion', 'airplanes']))

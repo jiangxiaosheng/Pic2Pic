@@ -44,7 +44,7 @@ class ResNet(Extractor):
                 images.append({
                     'img': d_img,
                     'cls': d_cls,
-                    'hist': feature
+                    'feature': feature
                 })
             cPickle.dump(images, open(os.path.join('indices', sample_path), "wb", True))
         return images
