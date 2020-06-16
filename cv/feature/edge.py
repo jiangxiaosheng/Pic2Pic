@@ -79,16 +79,16 @@ class Edge(Extractor):
             images = cPickle.load(open(os.path.join('indices', sample_path), 'rb', True))
         except:
             images = []
-            data = samples.get_data()
+            data = samples.get_images_by_class()
             i = 1
-            for d in data.itertuples():
-                img, cls = getattr(d, "img"), getattr(d, "cls")
-                feature = self.extract_feature(img)
+            for d in data:
                 print(i)
                 i += 1
+                d_img, d_cls = d["img"], d["cls"]
+                feature = self.extract_feature(d_img)
                 images.append({
-                    'img': img,
-                    'cls': cls,
+                    'img': d_img,
+                    'cls': d_cls,
                     'feature': feature
                 })
         cPickle.dump(images, open(os.path.join('indices', sample_path), "wb", True))
